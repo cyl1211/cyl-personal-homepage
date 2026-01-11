@@ -1,7 +1,18 @@
-import { useState } from 'react'
-import { Mail, Phone, MapPin, Send, Github, Linkedin, FileText, MessageSquare } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { Mail, Phone, MapPin, Send, Github, Download, MessageCircle } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+
+// EmailJS 配置 - 请替换为你自己的配置
+// 1. 访问 https://www.emailjs.com/ 注册账号
+// 2. 创建 Email Service（连接你的邮箱）
+// 3. 创建 Email Template（设置邮件模板）
+// 4. 获取以下三个值并替换
+const EMAILJS_SERVICE_ID = 'service_1'  // 替换为你的 Service ID
+const EMAILJS_TEMPLATE_ID = 'template_1'  // 替换为你的 Template ID
+const EMAILJS_PUBLIC_KEY = 'ndWAvlPpu3gez_2GR'  // 替换为你的 Public Key
 
 const Contact = () => {
+  const formRef = useRef<HTMLFormElement>(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,12 +32,19 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!formRef.current) return
+
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
-    // 模拟表单提交
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      )
+      
       setSubmitStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
       
@@ -34,26 +52,37 @@ const Contact = () => {
       setTimeout(() => {
         setSubmitStatus('idle')
       }, 3000)
-    }, 1000)
+    } catch (error) {
+      console.error('EmailJS Error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
       label: '邮箱',
-      value: 'your.email@example.com',
-      link: 'mailto:your.email@example.com',
+      value: 'chenyilun1211@126.com',
+      link: 'mailto:chenyilun1211@126.com',
     },
     {
       icon: <Phone className="w-6 h-6" />,
       label: '电话',
-      value: '+86 138-0000-0000',
-      link: 'tel:+8613800000000',
+      value: '+86 166-0210-4701',
+      link: 'tel:+8616602104701',
+    },
+    {
+      icon: <MessageCircle className="w-6 h-6" />,
+      label: '微信',
+      value: '16602104701（电话同号）',
+      link: null,
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       label: '地址',
-      value: '中国，北京市',
+      value: '中国，上海市',
       link: null,
     },
   ]
@@ -62,20 +91,8 @@ const Contact = () => {
     {
       icon: <Github className="w-6 h-6" />,
       name: 'GitHub',
-      url: 'https://github.com',
+      url: 'https://github.com/cyl1211',  // 替换为你的 GitHub 地址
       color: 'hover:text-gray-900',
-    },
-    {
-      icon: <Linkedin className="w-6 h-6" />,
-      name: 'LinkedIn',
-      url: 'https://linkedin.com',
-      color: 'hover:text-blue-600',
-    },
-    {
-      icon: <MessageSquare className="w-6 h-6" />,
-      name: '微信',
-      url: '#',
-      color: 'hover:text-green-600',
     },
   ]
 
@@ -98,7 +115,7 @@ const Contact = () => {
             {/* 联系表单 */}
             <div>
               <h2 className="text-2xl font-bold mb-6">发送消息</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label
                     htmlFor="name"
@@ -255,25 +272,15 @@ const Contact = () => {
               </div>
 
               {/* 简历下载 */}
-              <div className="card bg-primary-50 border-2 border-primary-200">
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center text-white">
-                    <FileText className="w-6 h-6" />
-                  </div>
-                  <div className="flex-grow">
-                    <h3 className="font-semibold text-gray-900 mb-1">下载简历</h3>
-                    <p className="text-sm text-gray-600 mb-3">
-                      查看我的完整工作经历和技能
-                    </p>
-                    <a
-                      href="/resume.pdf"
-                      download
-                      className="btn-secondary text-sm"
-                    >
-                      下载 PDF
-                    </a>
-                  </div>
-                </div>
+              <div className="mt-8">
+                <a
+                  href="/resume.pdf"
+                  download
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-full font-medium shadow-lg shadow-gray-900/20 hover:shadow-xl hover:shadow-gray-900/30 hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <Download className="w-5 h-5 group-hover:animate-bounce" />
+                  <span>下载简历</span>
+                </a>
               </div>
             </div>
           </div>
@@ -283,9 +290,9 @@ const Contact = () => {
       {/* 响应时间说明 */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom text-center max-w-3xl">
-          <h2 className="text-2xl font-bold mb-4">通常我会在 24 小时内回复</h2>
+          <h2 className="text-2xl font-bold mb-4">通常我会尽快回复</h2>
           <p className="text-gray-600">
-            如果你有紧急项目需求，建议直接通过电话或微信联系我。我期待与你合作！
+            如果您有紧急项目需求，建议直接通过微信联系我。我期待与您合作！
           </p>
         </div>
       </section>

@@ -1,51 +1,44 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Code, Palette, PenTool, TrendingUp } from 'lucide-react'
+import { ArrowRight, Code, Palette, PenTool, Brain } from 'lucide-react'
 
 const Home = () => {
   const recentUpdates = [
     {
       id: 1,
-      title: '最新项目：响应式电商平台',
-      type: '项目',
-      date: '2024-01-15',
+      title: '个人主页开发',
+      type: '作品集',
+      date: '2026-01-11',
       link: '/portfolio',
     },
     {
       id: 2,
-      title: '技术分享：React Hooks 最佳实践',
+      title: '个人主页',
       type: '博客',
-      date: '2024-01-10',
+      date: '2026-01-11',
       link: '/blog',
-    },
-    {
-      id: 3,
-      title: '设计作品：品牌视觉识别系统',
-      type: '项目',
-      date: '2024-01-05',
-      link: '/portfolio',
     },
   ]
 
   const services = [
     {
       icon: <Code className="w-8 h-8" />,
-      title: '前端开发',
-      description: 'React、Vue、TypeScript 等现代前端技术栈',
+      title: '全栈开发',
+      description: '一人搞定全栈开发',
     },
     {
       icon: <Palette className="w-8 h-8" />,
-      title: 'UI/UX 设计',
-      description: '用户界面设计与用户体验优化',
+      title: '算法选型',
+      description: 'AI算法选型与落地',
     },
     {
       icon: <PenTool className="w-8 h-8" />,
-      title: '品牌设计',
-      description: '品牌视觉识别与创意设计',
+      title: '产品研发',
+      description: 'AI产品研发与落地',
     },
     {
-      icon: <TrendingUp className="w-8 h-8" />,
+      icon: <Brain className="w-8 h-8" />,
       title: '技术咨询',
-      description: '技术方案设计与架构优化',
+      description: 'AI技术落地方案设计与技术咨询',
     },
   ]
 
@@ -57,14 +50,13 @@ const Home = () => {
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
               你好，我是{' '}
-              <span className="text-primary-600">[你的名字]</span>
+              <Link to="/about" className="text-primary-600 hover:text-primary-700 hover:underline transition-colors duration-200">陈以伦</Link>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-4">
-              [用一句有力的话概括你的核心价值]
+              专注于AI+行业应用，让AI技术真正落地。
             </p>
             <p className="text-lg text-gray-500 mb-8">
-              我是一名 [你的职业]，专注于 [你的专业领域]。
-              通过创新和专业技能，我致力于 [你的使命/目标]。
+              我是一名 AI全栈工程师，专注于利用AI技术解决实际问题。
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/portfolio" className="btn-primary">

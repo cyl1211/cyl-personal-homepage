@@ -18,76 +18,15 @@ const Blog = () => {
   const posts: BlogPost[] = [
     {
       id: 1,
-      title: 'React Hooks 最佳实践指南',
-      excerpt:
-        '深入探讨 React Hooks 的使用技巧和最佳实践，帮助你写出更优雅、更高效的 React 代码。',
-      content: '',
-      date: '2024-01-15',
-      readTime: '8 分钟',
+      title: '个人主页',
+      excerpt: '个人主页的开发过程和心得分享。',
+      content: '我的个人主页借助cursor开发，自己不用写一行代码，完全用提示词即可实现功能开发。',
+      date: '2026-01-11',
+      readTime: '2 分钟',
       category: '技术',
-      tags: ['React', 'Hooks', '前端开发'],
+      tags: ['cursor', 'vscode', '前端开发'],
       featured: true,
-    },
-    {
-      id: 2,
-      title: 'TypeScript 类型系统深度解析',
-      excerpt:
-        '从基础到高级，全面解析 TypeScript 的类型系统，让你的代码更加类型安全。',
-      content: '',
-      date: '2024-01-10',
-      readTime: '12 分钟',
-      category: '技术',
-      tags: ['TypeScript', '类型系统'],
-      featured: true,
-    },
-    {
-      id: 3,
-      title: '现代前端构建工具对比：Vite vs Webpack',
-      excerpt:
-        '对比分析 Vite 和 Webpack 的优缺点，帮助你选择最适合项目的构建工具。',
-      content: '',
-      date: '2024-01-05',
-      readTime: '10 分钟',
-      category: '技术',
-      tags: ['Vite', 'Webpack', '构建工具'],
-      featured: false,
-    },
-    {
-      id: 4,
-      title: 'UI/UX 设计原则：如何创造更好的用户体验',
-      excerpt:
-        '分享我在 UI/UX 设计中的一些心得和原则，帮助你设计出更用户友好的界面。',
-      content: '',
-      date: '2023-12-28',
-      readTime: '6 分钟',
-      category: '设计',
-      tags: ['UI/UX', '设计原则'],
-      featured: false,
-    },
-    {
-      id: 5,
-      title: '2024 年前端开发趋势预测',
-      excerpt:
-        '基于当前技术发展，预测 2024 年前端开发的主要趋势和值得关注的技术。',
-      content: '',
-      date: '2023-12-20',
-      readTime: '5 分钟',
-      category: '行业',
-      tags: ['前端', '趋势', '2024'],
-      featured: false,
-    },
-    {
-      id: 6,
-      title: '从零开始学习 Tailwind CSS',
-      excerpt:
-        '一个完整的 Tailwind CSS 入门教程，帮助你快速掌握这个强大的 CSS 框架。',
-      content: '',
-      date: '2023-12-15',
-      readTime: '15 分钟',
-      category: '教程',
-      tags: ['Tailwind CSS', 'CSS', '教程'],
-      featured: false,
-    },
+    }
   ]
 
   const categories = ['全部', '技术', '设计', '行业', '教程']

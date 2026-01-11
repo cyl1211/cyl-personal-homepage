@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react'
+import { Menu, X, Github } from 'lucide-react'
 
 interface LayoutProps {
   children: ReactNode
@@ -85,16 +85,21 @@ const Layout = ({ children }: LayoutProps) => {
       {/* 页脚 */}
       <footer className="bg-gray-900 text-white">
         <div className="container-custom py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">个人主页</h3>
-              <p className="text-gray-400">
-                展示我的作品、分享我的想法，连接更多可能性。
-              </p>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            {/* 个人主页介绍 - 窄列 */}
+            <div className="md:col-span-3">
+              <h3 className="text-lg font-semibold mb-4">个人主页</h3>
+              <ul className="text-gray-400 space-y-2 pl-2">
+                <li>展示我的作品</li>
+                <li>分享我的想法</li>
+                <li>连接更多可能性</li>
+              </ul>
             </div>
-            <div>
+            
+            {/* 快速链接 - 宽列 */}
+            <div className="md:col-span-5 md:pl-12">
               <h4 className="text-lg font-semibold mb-4">快速链接</h4>
-              <ul className="space-y-2">
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-3 pl-2">
                 {navigation.map((item) => (
                   <li key={item.name}>
                     <Link
@@ -107,33 +112,20 @@ const Layout = ({ children }: LayoutProps) => {
                 ))}
               </ul>
             </div>
-            <div>
+            
+            {/* 社交媒体 - 只有 GitHub */}
+            <div className="md:col-span-4">
               <h4 className="text-lg font-semibold mb-4">社交媒体</h4>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 pl-2">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/cyl1211"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                  className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2"
                   aria-label="GitHub"
                 >
                   <Github size={24} />
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={24} />
-                </a>
-                <a
-                  href="mailto:your.email@example.com"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                  aria-label="Email"
-                >
-                  <Mail size={24} />
+                  <span>GitHub</span>
                 </a>
               </div>
             </div>
