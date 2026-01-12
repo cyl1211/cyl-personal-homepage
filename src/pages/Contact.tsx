@@ -2,6 +2,9 @@ import { useState, useRef } from 'react'
 import { Mail, Phone, MapPin, Send, Github, Download, MessageCircle } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 
+// 获取基础路径（Vite 环境变量）
+const BASE_URL = import.meta.env.BASE_URL
+
 // EmailJS 配置 - 请替换为你自己的配置
 // 1. 访问 https://www.emailjs.com/ 注册账号
 // 2. 创建 Email Service（连接你的邮箱）
@@ -274,7 +277,7 @@ const Contact = () => {
               {/* 简历下载 */}
               <div className="mt-8">
                 <a
-                  href="/resume.pdf"
+                  href={`${BASE_URL}resume.pdf`}
                   download
                   className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-full font-medium shadow-lg shadow-gray-900/20 hover:shadow-xl hover:shadow-gray-900/30 hover:-translate-y-0.5 transition-all duration-300"
                 >

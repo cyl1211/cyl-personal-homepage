@@ -1,5 +1,9 @@
 import { useState } from 'react'
-import { ExternalLink, Github, Code, Palette, Globe } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ExternalLink, Github, Code, Palette, Globe, ChevronRight } from 'lucide-react'
+
+// 获取基础路径（Vite 环境变量）
+const BASE_URL = import.meta.env.BASE_URL
 
 interface Project {
   id: number
@@ -26,7 +30,7 @@ const Portfolio = () => {
       longDescription:
         '这是一个使用 React + TypeScript 构建的现代化个人主页。项目采用了 React Router 进行路由管理，实现了个人介绍、作品展示、博客展示、联系方式等功能。使用了 Tailwind CSS 进行样式管理，并实现了完整的响应式设计。',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'React Router'],
-      image: '/projects/portfolio1.jpg',
+      image: `${BASE_URL}projects/portfolio1.jpg`,
       githubUrl: 'https://github.com/cyl1211/cyl-personal-homepage',
       liveUrl: 'https://cyl-personal-homepage.vercel.app/',
       featured: true,
@@ -86,9 +90,10 @@ const Portfolio = () => {
           {/* 项目网格 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project) => (
-              <div
+              <Link
                 key={project.id}
-                className={`card group cursor-pointer overflow-hidden ${
+                to={`/portfolio/${project.id}`}
+                className={`card group cursor-pointer overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ${
                   project.featured ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
               >
@@ -124,7 +129,7 @@ const Portfolio = () => {
                   </div>
                 </div>
 
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 group-hover:text-primary-600 transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-gray-600 mb-4 line-clamp-2">
@@ -149,33 +154,41 @@ const Portfolio = () => {
                 </div>
 
                 {/* 操作按钮 */}
-                <div className="flex gap-3">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition-colors duration-200"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Github className="w-5 h-5" />
-                      <span className="text-sm">代码</span>
-                    </a>
-                  )}
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition-colors duration-200"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                      <span className="text-sm">预览</span>
-                    </a>
-                  )}
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-3">
+                    {project.githubUrl && (
+                      <span
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          window.open(project.githubUrl, '_blank')
+                        }}
+                        className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition-colors duration-200"
+                      >
+                        <Github className="w-5 h-5" />
+                        <span className="text-sm">代码</span>
+                      </span>
+                    )}
+                    {project.liveUrl && (
+                      <span
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          window.open(project.liveUrl, '_blank')
+                        }}
+                        className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition-colors duration-200"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                        <span className="text-sm">预览</span>
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center text-primary-600 text-sm font-medium">
+                    <span>查看详情</span>
+                    <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

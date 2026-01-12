@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { Download, Award, Briefcase, GraduationCap, X, ChevronRight, Target, Rocket } from 'lucide-react'
 
+// 获取基础路径（Vite 环境变量）
+const BASE_URL = import.meta.env.BASE_URL
+
 // 工作经历类型定义
 interface Project {
   name: string
@@ -312,7 +315,7 @@ const About = () => {
               {/* 下载按钮 */}
               <div className="mt-10">
                 <a
-                  href="/resume.pdf"
+                  href={`${BASE_URL}resume.pdf`}
                   download
                   className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-full font-medium shadow-lg shadow-gray-900/20 hover:shadow-xl hover:shadow-gray-900/30 hover:-translate-y-0.5 transition-all duration-300"
                 >
@@ -328,7 +331,7 @@ const About = () => {
                 {/* 照片容器 - 带边框 */}
                 <div className="relative w-72 md:w-80 lg:w-96 aspect-[3/4] p-2 bg-gradient-to-br from-primary-400 via-blue-500 to-purple-500 rounded-2xl shadow-xl shadow-primary-500/20">
                   <img 
-                    src="/photo.jpg" 
+                    src={`${BASE_URL}photo.jpg`} 
                     alt="陈以伦"
                     className="w-full h-full object-cover rounded-xl"
                   />
